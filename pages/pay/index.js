@@ -22,6 +22,8 @@ export default function Index() {
     }, []);
 
     const handlePay = async () => {
+        setIsLoading(true);
+
         const random_order_id = (length, format) => {
             let result = '';
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -53,11 +55,9 @@ export default function Index() {
         });
 
         const { token } = await response.json();
-        setIsLoading(true);
-
-        // check token is exist
+        
+        setIsLoading(false);
         if (token) {
-            setIsLoading(false);
             window.snap.pay(token, {
                 onSuccess: (result) => {
                     window.location.replace('/pay/success');
@@ -82,10 +82,8 @@ export default function Index() {
                             <div className="card-body">
                                 <h5 className="card-title text-dark">Order #32323</h5>
                                 <p className="card-text text-dark">Total: Rp 20.000</p>
-                                {/* check isLoading */}
                                 {isLoading ? (
                                     <div className="spinner-border text-primary" role="status">
-                                        <span className="sr-only">Loading...</span>
                                     </div>
                                 ) : <button className="btn btn-primary" onClick={handlePay} disabled={isLoading}>
                                     Pay
