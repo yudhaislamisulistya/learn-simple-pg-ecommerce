@@ -55,7 +55,7 @@ export default function Index() {
 
         window.snap.pay(token, {
             onSuccess: (result) => {
-                window.location.replace('/pay/pending');
+                window.location.replace('/pay/success');
             },
             onPending: (result) => {
                 window.location.replace('/pay/pending');
