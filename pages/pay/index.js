@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // make midtrans client
 const midtransClient = require('midtrans-client');
@@ -6,6 +6,8 @@ const midtransClient = require('midtrans-client');
 // Create Snap API instance
 
 export default function Index() {
+    // make isLoading useState
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -20,7 +22,6 @@ export default function Index() {
     }, []);
 
     const handlePay = async () => {
-
         const random_order_id = (length, format) => {
             let result = '';
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -50,20 +51,25 @@ export default function Index() {
                 }
             })
         });
-        
-        const {token} = await response.json();
 
-        window.snap.pay(token, {
-            onSuccess: (result) => {
-                window.location.replace('/pay/success');
-            },
-            onPending: (result) => {
-                window.location.replace('/pay/pending');
-            },
-            onError: (result) => {
-                window.location.replace('/pay/error');
-            },
-        });
+        const { token } = await response.json();
+        setIsLoading(true);
+
+        // check token is exist
+        if (token) {
+            setIsLoading(false);
+            window.snap.pay(token, {
+                onSuccess: (result) => {
+                    window.location.replace('/pay/success');
+                },
+                onPending: (result) => {
+                    window.location.replace('/pay/pending');
+                },
+                onError: (result) => {
+                    window.location.replace('/pay/error');
+                },
+            });
+        }
     }
 
     return (
@@ -76,7 +82,14 @@ export default function Index() {
                             <div className="card-body">
                                 <h5 className="card-title text-dark">Order #32323</h5>
                                 <p className="card-text text-dark">Total: Rp 20.000</p>
-                                <button className="btn btn-primary" onClick={handlePay}>Pay</button>
+                                {/* check isLoading */}
+                                {isLoading ? (
+                                    <div className="spinner-border text-primary" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                ) : <button className="btn btn-primary" onClick={handlePay} disabled={isLoading}>
+                                    Pay
+                                </button>}
                             </div>
                         </div>
                     </div>
