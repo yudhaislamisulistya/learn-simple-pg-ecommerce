@@ -1,38 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Berikut adalah contoh dokumentasi untuk program Next.js Anda yang dapat diunggah di README.md:
 
-## Getting Started
+# Program Next.js - Payment Gateway Integration (MIDTRANS)
 
-First, run the development server:
+Program ini adalah aplikasi web menggunakan framework Next.js yang mengintegrasikan sistem pembayaran dengan payment gateway MIDTRANS. Aplikasi ini memiliki beberapa fitur utama seperti pembuatan transaksi melalui API, dan halaman-halaman terkait pembayaran.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Daftar Isi
+
+- [Instalasi](#instalasi)
+- [Menjalankan Aplikasi](#menjalankan-aplikasi)
+- [API - Pembuatan Transaksi](#api-pembuatan-transaksi)
+- [Halaman Pembayaran](#halaman-pembayaran)
+  - [Halaman Pay](#halaman-pay)
+  - [Halaman Error](#halaman-error)
+  - [Halaman Pending](#halaman-pending)
+  - [Halaman Success](#halaman-success)
+
+## Instalasi
+
+1. Clone repositori ini ke dalam direktori lokal:
+
+```shell
+git clone https://github.com/yudhaislamisulistya/learn-simple-pg-ecommerce.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Masuk ke direktori proyek:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```shell
+cd learn-simple-pg-ecommerce
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+3. Install dependensi proyek:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```shell
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Menjalankan Aplikasi
 
-## Learn More
+1. Jalankan server pengembangan Next.js:
 
-To learn more about Next.js, take a look at the following resources:
+```shell
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Buka browser dan akses aplikasi melalui URL berikut:
 
-## Deploy on Vercel
+```
+http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API - Pembuatan Transaksi
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Endpoint `api/transaction/create` digunakan untuk membuat transaksi melalui payment gateway. Anda dapat mengirimkan permintaan POST ke endpoint ini dengan data transaksi yang diperlukan. Contoh implementasi penggunaan endpoint ini dapat ditemukan pada file `api/transaction/create.js`.
+
+## Halaman Pembayaran
+
+### Halaman Pay
+
+Halaman `page/pay/` digunakan untuk menampilkan pembayaran. Anda dapat mengakses halaman ini melalui URL berikut:
+
+```
+http://localhost:3000/pay/
+```
+
+### Halaman Error
+
+Halaman `page/pay/error` digunakan untuk menampilkan pesan kesalahan jika terjadi masalah selama proses pembayaran. Anda dapat mengakses halaman ini melalui URL berikut:
+
+```
+http://localhost:3000/pay/error
+```
+
+### Halaman Pending
+
+Halaman `page/pay/pending` digunakan untuk menampilkan status pesanan yang sedang dalam proses pembayaran. Anda dapat mengakses halaman ini melalui URL berikut:
+
+```
+http://localhost:3000/pay/pending
+```
+
+### Halaman Success
+
+Halaman `page/pay/success` digunakan untuk menampilkan pesan keberhasilan setelah pembayaran berhasil. Anda dapat mengakses halaman ini melalui URL berikut:
+
+```
+http://localhost:3000/pay/success
+```
+
+---
