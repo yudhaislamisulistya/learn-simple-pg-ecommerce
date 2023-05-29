@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model customers {
+  id      Int    @id @default(autoincrement())
+  name    String @db.VarChar(255)
+  address String @db.Text
+  phone   String @db.VarChar(25)
+}
+
+model transactions {
+  id                  Int      @id @default(autoincrement()) @db.UnsignedInt
+  payment_type        String?  @db.VarChar(255)
+  transaction_status  String?  @db.VarChar(255)
+  pdf_url             String?  @db.VarChar(255)
+  finish_redirect_url String?  @db.VarChar(255)
+  status_code         String?  @db.VarChar(255)
+  transaction_time    String?  @db.Text
+  gross_amount        Decimal? @db.Decimal(10, 2)
+  order_id            String?  @db.VarChar(255)
+  transaction_id      String?  @db.VarChar(255)
+  fraud_status        String?  @db.VarChar(255)
+  status_message      String?  @db.VarChar(255)
+}

@@ -13,10 +13,10 @@ export default async function handler(req, res) {
         const transaction = await snap.createTransaction(parameter)
             .then((transaction) => {
                 const transactionToken = transaction.token;
-                res.status(200).json({ token: transactionToken })
+                res.status(200).json({ token: transactionToken, transaction: transaction })
             })
             .catch((e) => {
-                res.status(500).json({ message: "Error", e: e})
+                res.status(500).json({ message: "Error", e: e })
             })
     } else {
         res.status(405).json({ message: "Method not allowed" })

@@ -54,13 +54,36 @@ export default function Index() {
             })
         });
 
-        const { token } = await response.json();
-        
+        const { token, transaction } = await response.json();
+        console.log("Ini Hasil dari Response JSON : ", transaction)
+
         setIsLoading(false);
         if (token) {
             window.snap.pay(token, {
-                onSuccess: (result) => {
+                onSuccess: async (result) => {
+                    const responsePushCreate = await fetch('/api/transaction/pushCreate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            payment_type: result.payment_type,
+                            transaction_status: result.transaction_status,
+                            pdf_url: result.pdf_url,
+                            finish_url_redirect: result.finish_url_redirect,
+                            status_code: result.status_code,
+                            transaction_time: result.transaction_time,
+                            gross_amount: result.gross_amount,
+                            order_id: result.order_id,
+                            transaction_id: result.transaction_id,
+                            fraud_status: result.fraud_status,
+                            status_message: result.status_message
+                        })
+                    });
+
+                    console.log(await responsePushCreate.json())
                     window.location.replace('/pay/success');
+
                 },
                 onPending: (result) => {
                     window.location.replace('/pay/pending');
